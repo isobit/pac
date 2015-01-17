@@ -1,0 +1,25 @@
+case "$1" in
+	'install')
+		shift
+		pacman -S $@
+		;;
+	'search')
+		shift
+		pacman -Ss $@
+		;;
+	'update')
+		shift
+		pacman -Sy $@
+		;;
+	'upgrade')
+		shift
+		pacman -Syu $@
+		;;
+	'remove')
+		shift
+		pacman -R $@
+		;;
+	*)
+		echo $"Usage: $0 {install|search|update|upgrade|remove}"
+		exit 1
+esac
