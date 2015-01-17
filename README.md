@@ -11,7 +11,9 @@ I found the flags for pacman hard to remember, and my fingers were used to apt-g
 
 Just put the `bin` folder on your PATH.
 
-```PATH=$PATH:{PATH_TO_PAC}/bin```
+```
+PATH=$PATH:{PATH_TO_PAC}/bin
+```
 
 # Usage
 
