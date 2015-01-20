@@ -1,25 +1,120 @@
+#!/bin/bash
+# pac
+# A simple bash wrapper for pacman.
+# Author: Josh Glendenning
+# Usage: pac [options] <command> <args>...
+
+function log_info {
+	echo "$(tput setaf 4)$1$(tput sgr0)" >&2
+}
+function log_warn {
+	echo "$(tput setaf 3)$1$(tput sgr0)" >&2
+}
+function log_error {
+	echo "$(tput setaf 1)$1$(tput sgr0)" >&2
+}
+
+function display_help {
+echo "Usage: pac [options] <command> <args>..."
+echo "  pac install <package>"
+echo "  pac search <package>"
+echo "  pac remove <package>"
+echo "  pac update [args]..."
+echo "  pac upgrade [args]..."
+echo ""
+echo "Options:"
+echo "  -h | --help		Show this screen."
+echo "  -v | --verbose 	Display the command to be passed through."
+echo "  --yaourt		Use yaourt instead of pacman."
+echo "  --aur			See --yaourt above."
+}
+
+CMD='pacman'
+
+# Read config from ~/.pacrc if it exists
+# Availiable options:
+# use_sudo={true|false}
+
+if [ -r ~/.pacrc ]; then
+	source ~/.pacrc
+fi
+
+# Match any [options]
+
+while :
+do
+	case "$1" in
+		-h | --help)
+			display_help  # Call your function
+			# no shifting needed here, we're done.
+			exit 0
+			;;
+		-v | --verbose)
+			verbose=true
+			shift
+			;;
+		--aur | --yaourt)
+			CMD='yaourt'
+			# Disable sudo
+			use_sudo=false
+			shift
+			;;
+		--) # End of all options
+			shift
+			break
+			;;
+		-*)
+			log_error "Unknown option: $1"
+			exit 1
+			;;
+		*)  # No more options
+			break
+			;;
+	esac
+done
+
+# Update the $CMD if user_sudo is enabled in .pacrc
+# (and yaourt is not enabled)
+
+if [ "$use_sudo" = true ] ; then
+	CMD="sudo $CMD"
+fi
+
+# Match <command> and pass though to pacman
+
 case "$1" in
 	'install')
 		shift
-		pacman -S $@
+		CMD_ARGS="-S $@"
 		;;
 	'search')
 		shift
-		pacman -Ss $@
+		CMD_ARGS="-Ss $@"
 		;;
 	'update')
 		shift
-		pacman -Sy $@
+		CMD_ARGS="-Sy $@"
 		;;
 	'upgrade')
 		shift
-		pacman -Syu $@
+		CMD_ARGS="-Syu $@"
 		;;
 	'remove')
 		shift
-		pacman -R $@
+		CMD_ARGS="-R $@"
 		;;
 	*)
-		echo $"Usage: $0 {install|search|update|upgrade|remove}"
-		exit 1
+		log_warn 'No command specified, passing though...'
+		CMD_ARGS="$@"
+		;;
 esac
+
+# echo the whole command if verbose is enabled
+
+if [ "$verbose" = true ]; then
+	log_info "=> $(tput sgr0)$CMD $CMD_ARGS"
+fi
+
+# Call the command
+
+$CMD $CMD_ARGS
