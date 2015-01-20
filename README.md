@@ -5,11 +5,13 @@ A simple bash wrapper for pacman.
 
 ## Why?
 
-I found the flags for pacman hard to remember, and my fingers were used to apt-get/homebrew, so I created this tiny bash script to wrap pacman.
+I found the flags for pacman hard to remember, and my fingers were used to
+apt-get/homebrew, so I created this tiny bash script to wrap pacman.
 
 ## Installation
 
-Just put the `bin` folder on your PATH.
+Clone this repository `git clone https://github.com/joshglendenning/pac.git`
+and then put the `bin` folder on your PATH.
 
 ```
 PATH=$PATH:{PATH_TO_PAC}/bin
