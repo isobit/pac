@@ -3,11 +3,11 @@ pac
 
 A simple bash wrapper for pacman.
 
-# Why?
+## Why?
 
 I found the flags for pacman hard to remember, and my fingers were used to apt-get/homebrew, so I created this tiny bash script to wrap pacman.
 
-# Installation
+## Installation
 
 Just put the `bin` folder on your PATH.
 
@@ -15,7 +15,7 @@ Just put the `bin` folder on your PATH.
 PATH=$PATH:{PATH_TO_PAC}/bin
 ```
 
-# Usage
+## Usage
 
 `pac install {ARGS}` == `pacman -S {ARGS}`
 
