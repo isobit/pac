@@ -43,3 +43,12 @@ Options:
 `pac upgrade {ARGS}` == `pacman -Syu {ARGS}`
 
 `pac remove {ARGS}`  == `pacman -R {ARGS}`
+
+## Config
+
+*pac* will look for an optional config file at `~/.pacrc`.
+
+Available options:
+```
+use_sudo={true|false}		# Whether or not to auto-prefix pacman with sudo
+```
