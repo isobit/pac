@@ -5,28 +5,30 @@
 # Usage: pac [options] <command> <args>...
 
 function log_info {
-	echo "$(tput setaf 4)$1$(tput sgr0)" >&2
+echo "$(tput setaf 4)$1$(tput sgr0)" >&2
 }
 function log_warn {
-	echo "$(tput setaf 3)$1$(tput sgr0)" >&2
+echo "$(tput setaf 3)$1$(tput sgr0)" >&2
 }
 function log_error {
-	echo "$(tput setaf 1)$1$(tput sgr0)" >&2
+echo "$(tput setaf 1)ERROR:$(tput sgr0) $1" >&2
 }
 
 function display_help {
-echo "Usage: pac [options] <command> <args>..."
-echo "  pac install <package>"
-echo "  pac search <package>"
-echo "  pac remove <package>"
-echo "  pac update [args]..."
-echo "  pac upgrade [args]..."
-echo ""
-echo "Options:"
-echo "  -h | --help		Show this screen."
-echo "  -v | --verbose 	Display the command to be passed through."
-echo "  --yaourt		Use yaourt instead of pacman."
-echo "  --aur			See --yaourt above."
+cat <<EOS
+Usage: pac [options] <command> <args>...
+  pac install <package>
+  pac search <package>
+  pac remove <package>
+  pac update [args]...
+  pac upgrade [args]...
+
+Options:
+  -h | --help		Show this screen.
+  -v | --verbose 	Display the command to be passed through.
+  --yaourt		Use yaourt instead of pacman.
+  --aur			See --yaourt above.
+EOS
 }
 
 CMD='pacman'
