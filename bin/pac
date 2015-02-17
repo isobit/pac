@@ -28,6 +28,8 @@ Options:
   -v | --verbose 	Display the command to be passed through.
   --yaourt		Use yaourt instead of pacman.
   --aur			See --yaourt above.
+  --pacman		Force pacman if use_yaourt is enabled
+  --noaur		See --pacman above
 EOS
 }
 
@@ -56,9 +58,11 @@ do
 			shift
 			;;
 		--aur | --yaourt)
-			CMD='yaourt'
-			# Disable sudo
-			use_sudo=false
+			use_yaourt=true
+			shift
+			;;
+		--noaur | --pacman)
+			use_yaourt=false
 			shift
 			;;
 		--) # End of all options
@@ -74,6 +78,14 @@ do
 			;;
 	esac
 done
+
+# Use yaourt if use_yaourt is enabled in .pacrc
+
+if [ "$use_yaourt" = true ] ; then
+	CMD='yaourt'
+	# Disable sudo
+	use_sudo=false
+fi
 
 # Update the $CMD if user_sudo is enabled in .pacrc
 # (and yaourt is not enabled)

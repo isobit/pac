@@ -52,5 +52,6 @@ Options:
 
 Available options:
 ```
-use_sudo={true|false}		# Whether or not to auto-prefix pacman with sudo
+use_sudo={true|false}	# Whether or not to auto-prefix pacman with sudo
+use_yaourt={true|false}	# Use yaourt instead of pacman by default
 ```
