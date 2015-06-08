@@ -18,6 +18,7 @@ function display_help {
 cat <<EOS
 Usage: pac [options] <command> <args>...
   pac install <package>
+  pac install-tarball <file>
   pac search <package>
   pac remove <package>
   pac update [args]...
@@ -100,6 +101,10 @@ case "$1" in
 	'install')
 		shift
 		CMD_ARGS="-S $@"
+		;;
+	'install-tarball')
+		shift
+		CMD_ARGS="-U $@"
 		;;
 	'search')
 		shift
