@@ -31,8 +31,10 @@ Options:
   -h | --help		Show this screen.
   -v | --verbose 	Display the command to be passed through.
   --yaourt		Use yaourt instead of pacman.
-  --aur			See --yaourt above.
+  --pacman    Use pacman instead of yaourt.
 ```
+
+Pac will automatically use `yaourt` if it is installed, and will automatically use `sudo` if running pacman while not root.
 
 ### Commands (under the hood)
 
@@ -45,13 +47,3 @@ Options:
 `pac upgrade {ARGS}` == `pacman -Syu {ARGS}`
 
 `pac remove {ARGS}`  == `pacman -R {ARGS}`
-
-## Config
-
-*pac* will look for an optional config file at `~/.pacrc`.
-
-Available options:
-```
-use_sudo={true|false}	# Whether or not to auto-prefix pacman with sudo
-use_yaourt={true|false}	# Use yaourt instead of pacman by default
-```
