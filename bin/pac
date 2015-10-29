@@ -28,24 +28,23 @@ Options:
   -h | --help		Show this screen.
   -v | --verbose 	Display the command to be passed through.
   --yaourt		Use yaourt instead of pacman.
-  --aur			See --yaourt above.
   --pacman		Force pacman if use_yaourt is enabled
-  --noaur		See --pacman above
 EOS
 }
 
 CMD='pacman'
 
-# Read config from ~/.pacrc if it exists
-# Availiable options:
-# use_sudo={true|false}
+# Try to detect if yaourt is installed
+if hash yaourt 2>/dev/null; then
+	use_yaourt=true
+fi
 
-if [ -r ~/.pacrc ]; then
-	source ~/.pacrc
+# Try to detect if we are root
+if [ "$(whoami)" != "root" ]; then
+	use_sudo=true
 fi
 
 # Match any [options]
-
 while :
 do
 	case "$1" in
@@ -58,12 +57,16 @@ do
 			verbose=true
 			shift
 			;;
-		--aur | --yaourt)
+		--yaourt)
 			use_yaourt=true
 			shift
 			;;
-		--noaur | --pacman)
+		--pacman)
 			use_yaourt=false
+			shift
+			;;
+		--dry-run)
+			dry_run=true
 			shift
 			;;
 		--) # End of all options
@@ -72,7 +75,7 @@ do
 			;;
 		-*)
 			log_error "Unknown option: $1"
-			exit 1
+			break
 			;;
 		*)  # No more options
 			break
@@ -80,23 +83,20 @@ do
 	esac
 done
 
-# Use yaourt if use_yaourt is enabled in .pacrc
-
+# Use yaourt if use_yaourt is enabled
 if [ "$use_yaourt" = true ] ; then
 	CMD='yaourt'
 	# Disable sudo
 	use_sudo=false
 fi
 
-# Update the $CMD if user_sudo is enabled in .pacrc
+# Update the $CMD if user_sudo is enabled
 # (and yaourt is not enabled)
-
 if [ "$use_sudo" = true ] ; then
 	CMD="sudo $CMD"
 fi
 
 # Match <command> and pass though to pacman
-
 case "$1" in
 	'install')
 		shift
@@ -123,17 +123,19 @@ case "$1" in
 		CMD_ARGS="-R $@"
 		;;
 	*)
-		log_warn 'No command specified, passing though...'
-		CMD_ARGS="$@"
+		log_error "Unknown command: $1"
+		exit 1
 		;;
 esac
 
 # echo the whole command if verbose is enabled
-
 if [ "$verbose" = true ]; then
 	log_info "=> $(tput sgr0)$CMD $CMD_ARGS"
 fi
 
 # Call the command
-
-$CMD $CMD_ARGS
+if [ "$dry_run" = true ]; then
+	echo "$CMD $CMD_ARGS"
+else
+	$CMD $CMD_ARGS
+fi
