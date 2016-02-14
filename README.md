@@ -18,6 +18,12 @@ apt-get/homebrew.
 
 ## Installation
 
+### Quickstart
+```
+curl -s  | bash -s
+```
+
+### Manual
 Clone this repository `git clone https://github.com/joshglendenning/pac.git`
 and then put the `bin` folder on your PATH.
 
