@@ -4,6 +4,7 @@ pac
 A simple bash wrapper for pacman.
 
 Pros:
+* Really easy to use
 * No dependencies, 100% bash script
 * Works with `yaourt` if installed
 
