@@ -3,6 +3,13 @@ pac
 
 A simple bash wrapper for pacman.
 
+Pros:
+* No dependencies, 100% bash script
+* Works with `yaourt` if installed
+
+Cons:
+* Doesn't cover all of `pacman`'s capabilities
+
 ## Why?
 
 I found the flags for pacman hard to remember, and my fingers were used to
