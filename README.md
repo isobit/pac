@@ -20,7 +20,7 @@ apt-get/homebrew.
 
 ### Quickstart
 ```
-curl -s  | bash -s
+curl -s https://raw.githubusercontent.com/joshglendenning/pac/master/quickstart.sh | bash -s
 ```
 
 ### Manual
