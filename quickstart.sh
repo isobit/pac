@@ -17,6 +17,8 @@ fi
 function do_sudo {
     if [ "$use_sudo" = true ]; then
         sudo $@
+    else
+        $@
     fi
 }
 
