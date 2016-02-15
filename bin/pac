@@ -5,13 +5,13 @@
 # Usage: pac [options] <command> <args>...
 
 function log_info {
-echo "$(tput setaf 4)$1$(tput sgr0)" >&2
+    echo "$(tput setaf 4)$1$(tput sgr0)" >&2
 }
 function log_warn {
-echo "$(tput setaf 3)$1$(tput sgr0)" >&2
+    echo "$(tput setaf 3)$1$(tput sgr0)" >&2
 }
 function log_error {
-echo "$(tput setaf 1)ERROR:$(tput sgr0) $1" >&2
+    echo "$(tput setaf 1)ERROR:$(tput sgr0) $1" >&2
 }
 
 function display_help {
