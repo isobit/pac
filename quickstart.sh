@@ -42,11 +42,11 @@ do
     esac
 done
 
-log_info "Cloning pac repo"
-git clone https://github.com/joshglendenning/pac.git ~/.pac
+log_info "Cloning pac repo to /tmp/pac"
+git clone https://github.com/joshglendenning/pac.git /tmp/pac
 
-log_info "Linking pac to /usr/local/bin/"
-do_sudo ln -s ~/.pac/bin/pac /usr/local/bin/pac
+log_info "Installing pac to /usr/bin/"
+do_sudo install /tmp/pac/bin/pac /usr/bin/pac
 
 if [ "$noconfirm" = true ]; then
     install_yaourt=true
