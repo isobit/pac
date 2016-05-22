@@ -20,6 +20,7 @@ Usage: pac [options] <command> <args>...
   pac install <package>
   pac install-tarball <file>
   pac search <package>
+  pac info <package>
   pac remove <package>
   pac update [args]...
   pac upgrade [args]...
@@ -109,6 +110,10 @@ case "$1" in
 	'search')
 		shift
 		CMD_ARGS="-Ss $@"
+		;;
+	'info')
+		shift
+		CMD_ARGS="-Si $@"
 		;;
 	'update')
 		shift
