@@ -19,6 +19,7 @@ apt-get/homebrew.
 ## Installation
 
 ### Quickstart
+Do you trust me?
 ```
 bash <(curl -s https://raw.githubusercontent.com/joshglendenning/pac/master/quickstart.sh)
 ```
