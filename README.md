@@ -21,11 +21,11 @@ apt-get/homebrew.
 ### Quickstart
 Do you trust me?
 ```
-bash <(curl -s https://raw.githubusercontent.com/joshglendenning/pac/master/quickstart.sh)
+bash <(curl -s https://raw.githubusercontent.com/isobit/pac/master/quickstart.sh)
 ```
 
 ### Manual
-Clone this repository `git clone https://github.com/joshglendenning/pac.git`
+Clone this repository `git clone https://github.com/isobit/pac.git`
 and then put the `bin` folder on your PATH.
 
 ```
