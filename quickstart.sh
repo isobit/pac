@@ -45,7 +45,7 @@ do
 done
 
 log_info "Cloning pac repo to /tmp/pac"
-git clone https://github.com/joshglendenning/pac.git /tmp/pac
+git clone https://github.com/isobit/pac.git /tmp/pac
 
 log_info "Installing pac to /usr/bin/"
 do_sudo install /tmp/pac/bin/pac /usr/bin/pac
