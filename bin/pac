@@ -127,7 +127,7 @@ case "$1" in
 		;;
 	'remove')
 		shift
-		CMD_ARGS="-R $@"
+		CMD_ARGS="-Rs $@"
 		;;
 	'list-installed')
 		shift
