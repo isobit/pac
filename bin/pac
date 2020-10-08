@@ -24,6 +24,8 @@ Usage: pac [options] <command> <args>...
   pac remove <package>
   pac update [args]...
   pac upgrade [args]...
+  pac list-installed			List locally installed packages
+  pac locate <file>				Query the package which provides <file>
 
 Options:
   -h | --help		Show this screen.
@@ -125,7 +127,15 @@ case "$1" in
 		;;
 	'remove')
 		shift
-		CMD_ARGS="-R $@"
+		CMD_ARGS="-Rs $@"
+		;;
+	'list-installed')
+		shift
+		CMD_ARGS="-Q $@"
+		;;
+	'locate')
+		shift
+		CMD_ARGS="-Qo $@"
 		;;
 	*)
 		log_error "Unknown command: $1"
