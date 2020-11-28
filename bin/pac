@@ -93,12 +93,6 @@ if [ "$use_yaourt" = true ] ; then
 	use_sudo=false
 fi
 
-# Update the $CMD if user_sudo is enabled
-# (and yaourt is not enabled)
-if [ "$use_sudo" = true ] ; then
-	CMD="sudo $CMD"
-fi
-
 # Match <command> and pass though to pacman
 case "$1" in
 	'install')
@@ -112,10 +106,12 @@ case "$1" in
 	'search')
 		shift
 		CMD_ARGS="-Ss $@"
+		use_sudo=false
 		;;
 	'info')
 		shift
 		CMD_ARGS="-Si $@"
+		use_sudo=false
 		;;
 	'update')
 		shift
@@ -132,16 +128,24 @@ case "$1" in
 	'list-installed')
 		shift
 		CMD_ARGS="-Q $@"
+		use_sudo=false
 		;;
 	'locate')
 		shift
 		CMD_ARGS="-Qo $@"
+		use_sudo=false
 		;;
 	*)
 		log_error "Unknown command: $1"
 		exit 1
 		;;
 esac
+
+# Update the $CMD if user_sudo is enabled
+# (and yaourt is not enabled)
+if [ "$use_sudo" = true ] ; then
+	CMD="sudo $CMD"
+fi
 
 # echo the whole command if verbose is enabled
 if [ "$verbose" = true ]; then
