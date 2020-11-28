@@ -24,8 +24,8 @@ Usage: pac [options] <command> <args>...
   pac remove <package>
   pac update [args]...
   pac upgrade [args]...
-  pac list-installed			List locally installed packages
-  pac locate <file>				Query the package which provides <file>
+  pac list-installed		List locally installed packages
+  pac locate <file>		Name the package which provides <file>
 
 Options:
   -h | --help		Show this screen.
