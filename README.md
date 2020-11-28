@@ -37,17 +37,20 @@ PATH=$PATH:{PATH_TO_PAC}/bin
 ```
 Usage: pac [options] <command> <args>...
   pac install <package>
+  pac install-tarball <file>
   pac search <package>
   pac info <package>
   pac remove <package>
   pac update [args]...
   pac upgrade [args]...
+  pac list-installed                    List locally installed packages
+  pac locate <file>                     Query the package which provides <file>
 
 Options:
-  -h | --help		Show this screen.
-  -v | --verbose 	Display the command to be passed through.
-  --yaourt		Use yaourt instead of pacman.
-  --pacman    Use pacman instead of yaourt.
+  -h | --help           Show this screen.
+  -v | --verbose        Display the command to be passed through.
+  --yaourt              Use yaourt instead of pacman.
+  --pacman              Force pacman if use_yaourt is enabled
 ```
 
 Pac will automatically use `yaourt` if it is installed, and will automatically use `sudo` if running pacman while not root.
@@ -56,10 +59,18 @@ Pac will automatically use `yaourt` if it is installed, and will automatically u
 
 `pac install {ARGS}` == `pacman -S {ARGS}`
 
+`pac install-tarball {ARGS}` == `pacman -U {ARGS}`
+
 `pac search {ARGS}`  == `pacman -Ss {ARGS}`
+
+`pac info {ARGS}` == `pacman -Si {ARGS}`
+
+`pac remove {ARGS}`  == `pacman -Rs {ARGS}`
 
 `pac update {ARGS}`  == `pacman -Sy {ARGS}`
 
 `pac upgrade {ARGS}` == `pacman -Syu {ARGS}`
 
-`pac remove {ARGS}`  == `pacman -R {ARGS}`
+`pac list-installed {ARGS}` == `pacman -Q {ARGS}`
+
+`pac locate {ARGS}` == `pacman -Qo {ARGS}`
